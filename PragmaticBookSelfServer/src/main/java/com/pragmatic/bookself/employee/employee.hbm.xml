@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+	<class name="com.pragmatic.bookself.employee.EmployeeEntity" table="employee">
+		<meta attribute="class-description">
+			This class contains the employee detail.
+		</meta>
+		<id name="id" type="int" column="id">
+			<generator class="sequence" />
+		</id>
+		<property name="fname" column="fname" type="string" />
+		<property name="lname" column="lname" type="string" />
+		<property name="address" column="address" type="string" />
+		<property name="phoneNo" column="phoneno" type="string" />
+	</class>
+</hibernate-mapping>
