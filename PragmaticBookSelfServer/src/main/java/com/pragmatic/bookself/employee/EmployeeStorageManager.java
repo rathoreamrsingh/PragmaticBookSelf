@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.pragamtic.bookself.exception.PragmaticBookSelfException;
+import com.pragmatic.bookself.storagecontext.StorageContext;
 
 /**
  * This class is for the performing basic CRUD operation on employee data. This
@@ -41,42 +42,38 @@ public class EmployeeStorageManager {
 	}
 
 	/**
-	 * Insert employee data provided in employee table
+	 * Insert employee data in the table.
 	 * 
-	 * @param listOfEmployee
+	 * @param employee
+	 * @param context
 	 * @return
 	 * @throws PragmaticBookSelfException
 	 */
-	public int insertEmployeeData(List<EmployeeEntity> listOfEmployee, Session hibernateSessionx)
-			throws PragmaticBookSelfException {
-		int result = 0;
-
+	public int insertEmployeeData(EmployeeEntity employee, StorageContext context) throws PragmaticBookSelfException {
+		Integer result = 0;
+		Session hibernateSession = context.getHibernateSession();
 		Transaction tx = null;
 		try {
-			tx = hibernateSessionx.beginTransaction();
-			for (EmployeeEntity emp : listOfEmployee) {
-				result += (Integer) hibernateSessionx.save(emp);
-				hibernateSessionx.flush();
-			}
+			result = (Integer) hibernateSession.save(employee);
+			hibernateSession.flush();
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
 			e.printStackTrace();
-		} finally {
-			hibernateSessionx.close();
 		}
 
-		return result;
+		return (int) result;
 	}
 
 	/**
 	 * Updates specific employee data
 	 * 
 	 * @param employee
+	 * @param context
 	 * @return
 	 * @throws PragmaticBookSelfException
 	 */
-	public int updateEmployeeData(EmployeeEntity employee) throws PragmaticBookSelfException {
+	public int updateEmployeeData(EmployeeEntity employee, StorageContext context) throws PragmaticBookSelfException {
 		int result = 0;
 
 		return result;
@@ -85,10 +82,11 @@ public class EmployeeStorageManager {
 	/**
 	 * Retrieves all the employee data
 	 * 
+	 * @param context
 	 * @return
 	 * @throws PragmaticBookSelfException
 	 */
-	public List<EmployeeEntity> retrieveAllEmployeeData() throws PragmaticBookSelfException {
+	public List<EmployeeEntity> retrieveAllEmployeeData(StorageContext context) throws PragmaticBookSelfException {
 		List<EmployeeEntity> listOfEmployeeData = null;
 
 		return listOfEmployeeData;
@@ -98,9 +96,10 @@ public class EmployeeStorageManager {
 	 * Delete specific employee data based on employee id
 	 * 
 	 * @param employeeId
+	 * @param context
 	 * @throws PragmaticBookSelfException
 	 */
-	public void deleteEmployeeData(int employeeId) throws PragmaticBookSelfException {
+	public void deleteEmployeeData(int employeeId, StorageContext context) throws PragmaticBookSelfException {
 
 	}
 
@@ -108,10 +107,12 @@ public class EmployeeStorageManager {
 	 * Gets employee data based on id
 	 * 
 	 * @param employeeId
+	 * @param context
 	 * @return
 	 * @throws PragmaticBookSelfException
 	 */
-	public EmployeeEntity getEmployeeDataById(int employeeId) throws PragmaticBookSelfException {
+	public EmployeeEntity getEmployeeDataById(int employeeId, StorageContext context)
+			throws PragmaticBookSelfException {
 		EmployeeEntity result = null;
 
 		return result;
@@ -122,10 +123,12 @@ public class EmployeeStorageManager {
 	 * parameter and returns that to the caller
 	 * 
 	 * @param name
+	 * @param context
 	 * @return
 	 * @throws PragmaticBookSelfException
 	 */
-	public List<EmployeeEntity> getEmployeeDataByName(String name) throws PragmaticBookSelfException {
+	public List<EmployeeEntity> getEmployeeDataByName(String name, StorageContext context)
+			throws PragmaticBookSelfException {
 		List<EmployeeEntity> listOfEmployees = null;
 
 		return listOfEmployees;
