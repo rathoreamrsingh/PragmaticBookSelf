@@ -32,51 +32,20 @@ import com.pragmatic.bookself.storagecontext.StorageContext;
  *
  */
 public class EmployeeStorageManagerTest {
-	private static SessionFactory factory = null;
-	private static Connection connection = null;
+	private static StorageContext storageContext = new StorageContext();
 
 	@BeforeClass
-	public static void setUpTestEnv() {
-		try {
-			Configuration configuration = new Configuration();
-			factory = configuration.configure().buildSessionFactory();
-		} catch (Throwable ex) {
-			System.err.println("Failed to create sessionFactory object." + ex);
-			throw new ExceptionInInitializerError(ex);
-		}
-
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-
-		}
-
-		try {
-			connection = DriverManager.getConnection(
-					"jdbc:postgresql://pragmaticbookself.ck9wnnstulez.ap-south-1.rds.amazonaws.com/pragmaticbookself",
-					"scott", "scottscott");
-		} catch (SQLException e) {
-
-		}
+	public static void setUpTestEnv() throws PragmaticBookSelfException {
+		storageContext.init();
 	}
 
 	@AfterClass
-	public static void closeTestEnv() {
-		if (factory != null) {
-			factory.close();
-		}
-
-		if (connection != null) {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+	public static void closeTestEnv() throws PragmaticBookSelfException {
+		storageContext.close();
 	}
 
 	@Test
-	public void insertEmployeeData() {
+	public void insertEmployeeData() throws PragmaticBookSelfException {
 		int expectedResult = 2;
 		/*
 		 * Details of employee.
@@ -92,10 +61,11 @@ public class EmployeeStorageManagerTest {
 			/*
 			 * Inserting data in database.
 			 */
-			Session session = factory.openSession();
+			Session session = storageContext.getHibernateSession();
 			Transaction tx = session.beginTransaction();
-			StorageContext storageContext = new StorageContext(session);
+
 			actualResult = EmployeeStorageManager.getInstance().insertEmployeeData(employeeEntity, storageContext);
+			session.flush();
 			tx.commit();
 
 			if (session != null) {
@@ -103,11 +73,12 @@ public class EmployeeStorageManagerTest {
 			}
 		} catch (PragmaticBookSelfException e) {
 			fail("Caught exception" + e);
+			e.printStackTrace();
 		}
 
 		String selectQuery = "SELECT * from employee where fname = ? and lname = ?";
 		try {
-			PreparedStatement prepareStatement = connection.prepareStatement(selectQuery);
+			PreparedStatement prepareStatement = storageContext.getConnection().prepareStatement(selectQuery);
 			prepareStatement.setString(1, "Amar");
 			prepareStatement.setString(2, "Singh");
 
@@ -118,12 +89,12 @@ public class EmployeeStorageManagerTest {
 			prepareStatement.close();
 
 			String deleteQuery = "DELETE FROM EMPLOYEE WHERE ID = ?";
-			prepareStatement = connection.prepareStatement(deleteQuery);
+			prepareStatement = storageContext.getConnection().prepareStatement(deleteQuery);
 			prepareStatement.setInt(1, actualResult);
 			prepareStatement.executeUpdate();
 			prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (PragmaticBookSelfException | SQLException e) {
+			throw new PragmaticBookSelfException(e);
 		}
 		assertEquals(expectedResult, actualResult);
 	}

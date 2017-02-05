@@ -52,14 +52,11 @@ public class EmployeeStorageManager {
 	public int insertEmployeeData(EmployeeEntity employee, StorageContext context) throws PragmaticBookSelfException {
 		Integer result = 0;
 		Session hibernateSession = context.getHibernateSession();
-		Transaction tx = null;
 		try {
 			result = (Integer) hibernateSession.save(employee);
 			hibernateSession.flush();
 		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
+			throw new PragmaticBookSelfException(e);
 		}
 
 		return (int) result;

@@ -5,12 +5,13 @@
 
 
 <hibernate-mapping>
-	<class name="com.pragmatic.bookself.employee.EmployeeEntity" table="employee">
+	<class name="com.pragmatic.bookself.employee.EmployeeEntity"
+		table="employee">
 		<meta attribute="class-description">
 			This class contains the employee detail.
 		</meta>
 		<id name="id" type="int" column="id">
-			<generator class="sequence" />
+			<generator class="increment" />
 		</id>
 		<property name="fname" column="fname" type="string" />
 		<property name="lname" column="lname" type="string" />
