@@ -9,16 +9,17 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 import com.pragamtic.bookself.exception.PragmaticBookSelfException;
+import com.pragamtic.bookself.result.PragmaticBookSelfResult;
 import com.pragmatic.bookself.session.PragmaticBookselfSession;
 import com.pragmatic.bookself.storagecontext.StorageContext;
 
 /**
- * Base task for all the task upcoming. 
+ * Base task for all the task upcoming.
  * 
  * @author amar
  *
  */
-public abstract class PragmaticBookselfTask {
+public abstract class PragmaticBookselfTask<Result> {
 	/**
 	 * Initializes all the required data along with the validation of security
 	 * session
@@ -55,7 +56,8 @@ public abstract class PragmaticBookselfTask {
 	}
 
 	/**
-	 * Closes the connetion stablished. 
+	 * Closes the connection stablished.
+	 * 
 	 * @param session
 	 *            - PragmaticBookSelf SecuritySession
 	 * @param context
@@ -84,18 +86,20 @@ public abstract class PragmaticBookselfTask {
 
 	/**
 	 * Defines the basic step for execution of task.
+	 * 
 	 * @param session
 	 *            - PragmaticBookSelf SecuritySession
 	 * @param context
 	 *            - PragmaticBookSelf StorageContext.
 	 * @throws PragmaticBookSelfException
 	 */
-	public void executeTask(PragmaticBookselfSession session, StorageContext context)
+	public PragmaticBookSelfResult<Result> executeTask(PragmaticBookselfSession session, StorageContext context)
 			throws PragmaticBookSelfException {
+		PragmaticBookSelfResult<Result> result = null;
 		try {
 			init(session, context);
 			validateParameter(session, context);
-			execute(session, context);
+			result = execute(session, context);
 		} catch (Exception e) {
 			throw new PragmaticBookSelfException(e);
 		} finally {
@@ -105,7 +109,7 @@ public abstract class PragmaticBookselfTask {
 				throw new PragmaticBookSelfException(e);
 			}
 		}
-
+		return result;
 	}
 
 	/**
@@ -116,6 +120,6 @@ public abstract class PragmaticBookselfTask {
 	 *            - PragmaticBookSelf StorageContext.
 	 * @throws PragmaticBookSelfException
 	 */
-	protected abstract void execute(PragmaticBookselfSession session, StorageContext context)
+	protected abstract PragmaticBookSelfResult<Result> execute(PragmaticBookselfSession session, StorageContext context)
 			throws PragmaticBookSelfException;
 }

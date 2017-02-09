@@ -5,19 +5,12 @@
  */
 package com.pragamtic.bookself.employeeEntity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,11 +20,13 @@ import com.pragmatic.bookself.employee.EmployeeEntity;
 import com.pragmatic.bookself.employee.EmployeeStorageManager;
 import com.pragmatic.bookself.storagecontext.StorageContext;
 
+import junit.framework.TestCase;
+
 /**
  * @author amar
  *
  */
-public class EmployeeStorageManagerTest {
+public class EmployeeStorageManagerTest extends TestCase{
 	private static StorageContext storageContext = new StorageContext();
 
 	@BeforeClass
