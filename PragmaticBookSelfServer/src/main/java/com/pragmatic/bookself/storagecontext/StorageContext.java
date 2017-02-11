@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import com.pragamtic.bookself.exception.PragmaticBookSelfException;
@@ -21,6 +22,7 @@ public class StorageContext {
 	private SessionFactory factory = null;
 	private Connection connection = null;
 	private Session session = null;
+	private Transaction transaction = null;
 
 	/**
 	 * constructor
@@ -43,7 +45,6 @@ public class StorageContext {
 		createFactory();
 		createConnection();
 		openHibernateSession();
-
 	}
 
 	/**
@@ -122,6 +123,27 @@ public class StorageContext {
 	}
 
 	/**
+	 * Commits the transcation
+	 */
+	public void commitTransaction() throws PragmaticBookSelfException {
+		try {
+			if (transaction != null)
+				transaction.commit();
+		} catch (HibernateException he) {
+			throw new PragmaticBookSelfException(he.getMessage());
+		}
+	}
+
+	public void rollbackTransaction() throws PragmaticBookSelfException {
+		try {
+			if (transaction != null)
+				transaction.rollback();
+		} catch (HibernateException he) {
+			throw new PragmaticBookSelfException(he.getMessage());
+		}
+	}
+
+	/**
 	 * Flushes the session and closes that for the user
 	 * 
 	 * @throws PragmaticBookSelfException
@@ -190,4 +212,13 @@ public class StorageContext {
 			init();
 		return connection;
 	}
+
+	public Transaction getTransaction() {
+		return transaction;
+	}
+
+	public void setTransaction(Transaction transaction) {
+		this.transaction = transaction;
+	}
+
 }

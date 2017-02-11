@@ -38,21 +38,10 @@ public abstract class PragmaticBookselfTask<Result> {
 		Transaction transaction = null;
 		try {
 			transaction = context.getHibernateSession().beginTransaction();
+			context.setTransaction(transaction);
 		} catch (HibernateException | PragmaticBookSelfException e) {
-			/*
-			 * reverting the changes made in db.
-			 */
-			if (transaction != null)
-				transaction.rollback();
 			throw new PragmaticBookSelfException(e);
-		} finally {
-			/*
-			 * committing the changes made to db.
-			 */
-			if (transaction != null)
-				transaction.commit();
 		}
-
 	}
 
 	/**
@@ -100,7 +89,9 @@ public abstract class PragmaticBookselfTask<Result> {
 			init(session, context);
 			validateParameter(session, context);
 			result = execute(session, context);
+			context.commitTransaction();
 		} catch (Exception e) {
+			context.rollbackTransaction();
 			throw new PragmaticBookSelfException(e);
 		} finally {
 			try {
