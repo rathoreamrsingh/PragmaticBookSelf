@@ -111,6 +111,8 @@ public class EmployeeStorageManager {
 	public EmployeeEntity getEmployeeDataById(int employeeId, StorageContext context)
 			throws PragmaticBookSelfException {
 		EmployeeEntity result = null;
+		Session hibernateSession = context.getHibernateSession();
+		result = (EmployeeEntity) hibernateSession.get(EmployeeEntity.class, employeeId);
 
 		return result;
 	}
