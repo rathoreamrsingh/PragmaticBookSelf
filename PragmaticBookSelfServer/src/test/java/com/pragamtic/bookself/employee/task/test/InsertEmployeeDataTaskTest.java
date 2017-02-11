@@ -28,6 +28,11 @@ import junit.framework.TestCase;
  */
 public class InsertEmployeeDataTaskTest extends TestCase {
 
+	/**
+	 * Insert test case for insertion of data in employee table
+	 * 
+	 * @throws PragmaticBookSelfException
+	 */
 	@Test
 	public void testInsertEmployeeData() throws PragmaticBookSelfException {
 		int actualResult = 0;
