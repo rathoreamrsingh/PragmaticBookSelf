@@ -29,7 +29,7 @@ public class RetrieveEmployeeDataByIDTaskTest extends TestCase {
 		PragmaticBookselfTask<EmployeeEntity> retrive = new RetrieveEmployeeDataByIDTask(empID);
 		PragmaticBookselfSession session = new PragmaticBookselfSession();
 		StorageContext context = new StorageContext();
-		retrive.executeTask(session, context);
+		//kyuki kal ham id pe ek entry dale the ok // kaise dekhe the
 		PragmaticBookSelfResult<EmployeeEntity> result = retrive.executeTask(session, context);
 		EmployeeEntity employeeEntity = result.getResultedObject();
 		

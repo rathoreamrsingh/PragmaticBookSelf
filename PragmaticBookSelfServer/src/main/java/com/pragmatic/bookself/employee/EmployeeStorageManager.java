@@ -3,6 +3,7 @@ package com.pragmatic.bookself.employee;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -70,10 +71,21 @@ public class EmployeeStorageManager {
 	 * @return
 	 * @throws PragmaticBookSelfException
 	 */
-	public int updateEmployeeData(EmployeeEntity employee, StorageContext context) throws PragmaticBookSelfException {
-		int result = 0;
+	public EmployeeEntity updateEmployeeData(EmployeeEntity employee, StorageContext context)
+			throws PragmaticBookSelfException {
 
-		return result;
+		Session hibernateSession = context.getHibernateSession();
+		
+		try {
+			hibernateSession.update(employee);
+		} catch (HibernateException he) {
+			throw new PragmaticBookSelfException(he);
+		}
+		
+		
+		hibernateSession.evict(employee);
+
+		return employee;
 	}
 
 	/**
@@ -86,6 +98,15 @@ public class EmployeeStorageManager {
 	public List<EmployeeEntity> retrieveAllEmployeeData(StorageContext context) throws PragmaticBookSelfException {
 		List<EmployeeEntity> listOfEmployeeData = null;
 
+		Session hibernateSession = context.getHibernateSession();
+
+		String queryString = "FROM EmployeeEntity"; // select * from employee;//
+		try {
+			Query query = hibernateSession.createQuery(queryString);
+			listOfEmployeeData = query.list();
+		} catch (HibernateException he) {
+			throw new PragmaticBookSelfException(he);
+		}
 		return listOfEmployeeData;
 	}
 
