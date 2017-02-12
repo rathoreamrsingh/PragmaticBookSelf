@@ -23,6 +23,10 @@ import com.pragmatic.bookself.storagecontext.StorageContext;
 public class RetrieveEmployeeDataByIDTask extends PragmaticBookselfTask<EmployeeEntity> {
 	private int empID;
 
+	public RetrieveEmployeeDataByIDTask(int empID) {
+		this.empID = empID;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -31,6 +35,7 @@ public class RetrieveEmployeeDataByIDTask extends PragmaticBookselfTask<Employee
 	 * com.pragmatic.bookself.session.PragmaticBookselfSession,
 	 * com.pragmatic.bookself.storagecontext.StorageContext)
 	 */
+
 	@Override
 	protected void validateParameter(PragmaticBookselfSession session, StorageContext context)
 			throws PragmaticBookSelfException {
