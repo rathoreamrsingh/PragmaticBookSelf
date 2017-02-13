@@ -117,7 +117,11 @@ public class EmployeeStorageManager {
 	 * @param context
 	 * @throws PragmaticBookSelfException
 	 */
-	public void deleteEmployeeData(int employeeId, StorageContext context) throws PragmaticBookSelfException {
+	public EmployeeEntity deleteEmployeeData(int employeeId, StorageContext context) throws PragmaticBookSelfException {
+		EmployeeEntity result=null;
+		Session hibernateSession=context.getHibernateSession();
+		result=(EmployeeEntity) hibernateSession.get(EmployeeEntity.class, employeeId);
+		return result;
 
 	}
 
@@ -147,10 +151,11 @@ public class EmployeeStorageManager {
 	 * @return
 	 * @throws PragmaticBookSelfException
 	 */
-	public List<EmployeeEntity> getEmployeeDataByName(String name, StorageContext context)
+	public EmployeeEntity getEmployeeDataByName(String name, StorageContext context)
 			throws PragmaticBookSelfException {
-		List<EmployeeEntity> listOfEmployees = null;
-
-		return listOfEmployees;
+		EmployeeEntity result = null;
+Session hibernateSeesion = context.getHibernateSession();
+result = (EmployeeEntity) hibernateSeesion.get(EmployeeEntity.class,  name);
+		return result;
 	}
 }

@@ -20,12 +20,12 @@ import com.pragmatic.bookself.storagecontext.StorageContext;
  *
  * @version 1.0
  */
-public class UpdateEmployeeDataTask extends PragmaticBookselfTask<EmployeeEntity> {
-	private EmployeeEntity employee = null;
+public class DeleteEmployeeDataTask extends PragmaticBookselfTask<EmployeeEntity> {
+	private int empId;
 
-	//constructor
-	public UpdateEmployeeDataTask(EmployeeEntity employee) {
-		this.employee = employee;
+	public DeleteEmployeeDataTask(int empId) {
+		this.empId = empId;
+		// TODO Auto-generated constructor stub
 	}
 
 	/*
@@ -53,12 +53,13 @@ public class UpdateEmployeeDataTask extends PragmaticBookselfTask<EmployeeEntity
 	@Override
 	protected PragmaticBookSelfResult<EmployeeEntity> execute(PragmaticBookselfSession session, StorageContext context)
 			throws PragmaticBookSelfException {
-		EmployeeEntity updateEmployee = EmployeeStorageManager.getInstance().updateEmployeeData(employee, context);
-		PragmaticBookSelfResult<EmployeeEntity> pragamaticBookSelfResult = new PragmaticBookSelfResult<EmployeeEntity>();
-		pragamaticBookSelfResult.setRestltedObject(updateEmployee);
-		pragamaticBookSelfResult.setResultCode(new ResultCode(ResultCodes.SUCCESSFUL));
-
-		return pragamaticBookSelfResult;
+		PragmaticBookSelfResult<EmployeeEntity> result = new PragmaticBookSelfResult<EmployeeEntity>();
+		EmployeeStorageManager.getInstance().deleteEmployeeData(empId, context);
+		EmployeeEntity employeeEntity = EmployeeStorageManager.getInstance().deleteEmployeeData(empId, context);
+		result.setRestltedObject(employeeEntity);
+		result.setResultCode(new ResultCode(ResultCodes.SUCCESSFUL));
+		// TODO Auto-generated method stub
+		return result;
 	}
 
 }
