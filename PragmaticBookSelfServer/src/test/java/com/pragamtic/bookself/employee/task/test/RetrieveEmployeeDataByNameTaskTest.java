@@ -5,6 +5,8 @@
  */
 package com.pragamtic.bookself.employee.task.test;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import com.pragamtic.bookself.employee.task.RetrieveEmployeeDataByNameTask;
@@ -22,17 +24,19 @@ import junit.framework.TestCase;
  *
  * @version 1.0
  */
-public class RetrieveEmployeeDataByNameTaskTest extends TestCase{
+public class RetrieveEmployeeDataByNameTaskTest extends TestCase {
 	@Test
-	public void testRetrieveEmployeeDataByNameTask() throws PragmaticBookSelfException{
-		String fname ="guriya";
-		PragmaticBookselfTask<EmployeeEntity> retrieve = new RetrieveEmployeeDataByNameTask(fname);
+	public void testRetrieveEmployeeDataByNameTask() throws PragmaticBookSelfException {
+		String fname = "guriya";
+		PragmaticBookselfTask<List<EmployeeEntity>> retrieve = new RetrieveEmployeeDataByNameTask(fname);
 		PragmaticBookselfSession session = new PragmaticBookselfSession();
-		StorageContext context = new StorageContext();	
-		PragmaticBookSelfResult<EmployeeEntity> result = retrieve.executeTask(session, context);
-		EmployeeEntity employeeEntity = result.getResultedObject();
-		System.out.println(employeeEntity.getAddress());					
-		System.out.println("Test");
+		StorageContext context = new StorageContext();
+		PragmaticBookSelfResult<List<EmployeeEntity>> result = retrieve.executeTask(session, context);
+		List<EmployeeEntity> employeeEntityList = result.getResultedObject();
+
+		for (EmployeeEntity entity : employeeEntityList) {
+			System.out.println(entity.getAddress());
+		}
 	}
 
 }

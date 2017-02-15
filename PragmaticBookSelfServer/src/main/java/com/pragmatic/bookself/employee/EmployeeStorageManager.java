@@ -75,14 +75,13 @@ public class EmployeeStorageManager {
 			throws PragmaticBookSelfException {
 
 		Session hibernateSession = context.getHibernateSession();
-		
+
 		try {
 			hibernateSession.update(employee);
 		} catch (HibernateException he) {
 			throw new PragmaticBookSelfException(he);
 		}
-		
-		
+
 		hibernateSession.evict(employee);
 
 		return employee;
@@ -118,9 +117,9 @@ public class EmployeeStorageManager {
 	 * @throws PragmaticBookSelfException
 	 */
 	public EmployeeEntity deleteEmployeeData(int employeeId, StorageContext context) throws PragmaticBookSelfException {
-		EmployeeEntity result=null;
-		Session hibernateSession=context.getHibernateSession();
-		result=(EmployeeEntity) hibernateSession.get(EmployeeEntity.class, employeeId);
+		EmployeeEntity result = null;
+		Session hibernateSession = context.getHibernateSession();
+		result = (EmployeeEntity) hibernateSession.get(EmployeeEntity.class, employeeId);
 		return result;
 
 	}
@@ -151,11 +150,19 @@ public class EmployeeStorageManager {
 	 * @return
 	 * @throws PragmaticBookSelfException
 	 */
-	public EmployeeEntity getEmployeeDataByName(String name, StorageContext context)
+	public List<EmployeeEntity> getEmployeeDataByName(String name, StorageContext context)
 			throws PragmaticBookSelfException {
-		EmployeeEntity result = null;
-Session hibernateSeesion = context.getHibernateSession();
-result = (EmployeeEntity) hibernateSeesion.get(EmployeeEntity.class,  name);
+		List<EmployeeEntity> result = null;
+		try {
+			Session hibernateSeesion = context.getHibernateSession();
+			String retrieveEmployeebyNameQuery = "FROM EmployeeEntity e WHERE e.fname LIKE :fname or e.lname LIKE :lname";
+			Query query = hibernateSeesion.createQuery(retrieveEmployeebyNameQuery);
+			query.setParameter("fname", name);
+			query.setParameter("lname", name);
+			result = (List<EmployeeEntity>) query.list();
+		} catch (HibernateException he) {
+			throw new PragmaticBookSelfException(he);
+		}
 		return result;
 	}
 }
