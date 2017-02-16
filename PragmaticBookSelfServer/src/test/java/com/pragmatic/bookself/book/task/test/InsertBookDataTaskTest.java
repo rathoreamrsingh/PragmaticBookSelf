@@ -5,6 +5,7 @@
  */
 package com.pragmatic.bookself.book.task.test;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,6 +34,7 @@ public class InsertBookDataTaskTest extends TestCase {
 		book.setB_name("Math");
 		book.setAuthor_id(103);
 		book.setRating(3);
+		
 		book.setPub_date("2005-02-01");
 		PragmaticBookselfTask task = new InsertBookDatatTask(book);
 		PragmaticBookselfSession session = new PragmaticBookselfSession();

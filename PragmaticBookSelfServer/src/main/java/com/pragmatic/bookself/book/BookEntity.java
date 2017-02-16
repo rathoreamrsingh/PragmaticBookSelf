@@ -7,8 +7,8 @@ public class BookEntity {
 	private String b_name;
 	private int author_id;
 	private int rating;
-	private String pub_date;
-	public BookEntity(int id, String b_name, int author_id, int rating, String pub_date) {
+	private Date pub_date;
+	public BookEntity(int id, String b_name, int author_id, int rating, Date pub_date) {
 		super();
 		this.id = id;
 		this.b_name = b_name;
@@ -44,10 +44,10 @@ public class BookEntity {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public String getPub_date() {
+	public Date getPub_date() {
 		return pub_date;
 	}
-	public void setPub_date(String pub_date) {
+	public void setPub_date(Date pub_date) {
 		this.pub_date = pub_date;
 	}
 	

@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 import org.hibernate.annotations.Synchronize;
 
 import com.pragamtic.bookself.exception.PragmaticBookSelfException;
+import com.pragmatic.bookself.employee.EmployeeEntity;
 import com.pragmatic.bookself.storagecontext.StorageContext;
 
 /**
@@ -62,6 +63,14 @@ public class BookStorageManager {
 
 		}
 		return (int) result;
+
+	}
+
+	public BookEntity deleteBookData(int bookId, StorageContext context) throws PragmaticBookSelfException {
+		BookEntity result = null;
+		Session hibernateSession = context.getHibernateSession();
+		result = (BookEntity) hibernateSession.get(BookEntity.class, bookId);
+		return result;
 
 	}
 }
