@@ -29,7 +29,7 @@ public class UpdateEmployeeDataTaskTest extends TestCase {
 		EmployeeEntity employee = new EmployeeEntity();
 		employee.setId(1);
 		employee.setAddress("Bangalore karnataka "); //pehle ye sirf bangalore tha ab update kar rahe.
-		employee.setFname("Guriya");
+		employee.setFname("Nisha");
 		employee.setLname("Kumari");
 		employee.setPhoneNo("+9123456789"); //pehle ye sirf +91 tha
 		PragmaticBookselfTask task = new UpdateEmployeeDataTask(employee);

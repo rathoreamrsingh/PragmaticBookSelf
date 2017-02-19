@@ -73,4 +73,18 @@ public class BookStorageManager {
 		return result;
 
 	}
+	public BookEntity updateBookData(BookEntity book, StorageContext context) throws PragmaticBookSelfException{
+		Session hibernateSession = context.getHibernateSession();
+
+		try {
+			hibernateSession.update(book);
+		} catch (HibernateException he) {
+			throw new PragmaticBookSelfException(he);
+		}
+
+		hibernateSession.evict(book);
+
+		return book;
+		
+	}
 }

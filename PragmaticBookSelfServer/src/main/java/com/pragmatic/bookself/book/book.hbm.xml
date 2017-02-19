@@ -15,6 +15,6 @@
 		<property name="b_name" column="b_name" type="string" />
 		<property name="author_id" column="author_id" type="int" />
 		<property name="rating" column="rating" type="int" />
-		<property name="pub_date" column="pub_date" type="string" />
+		<property name="pub_date" column="pub_date" type="date" />
 	</class>
 </hibernate-mapping>

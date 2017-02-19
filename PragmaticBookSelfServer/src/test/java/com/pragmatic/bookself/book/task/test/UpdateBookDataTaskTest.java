@@ -7,10 +7,9 @@ package com.pragmatic.bookself.book.task.test;
 
 import org.junit.Test;
 
-import com.pragamtic.bookself.book.task.DeleteBookDataByIdTask;
-import com.pragamtic.bookself.employee.task.DeleteEmployeeDataTask;
+import com.pragamtic.bookself.book.task.UpdateBookDataTask;
+import com.pragamtic.bookself.employee.task.UpdateEmployeeDataTask;
 import com.pragamtic.bookself.exception.PragmaticBookSelfException;
-import com.pragamtic.bookself.result.PragmaticBookSelfResult;
 import com.pragamtic.bookself.task.core.PragmaticBookselfTask;
 import com.pragmatic.bookself.book.BookEntity;
 import com.pragmatic.bookself.employee.EmployeeEntity;
@@ -24,18 +23,18 @@ import junit.framework.TestCase;
  *
  * @version 1.0
  */
-public class DeleteBookDataByIdTaskTest extends TestCase {
+public class UpdateBookDataTaskTest extends TestCase{
 	@Test
-	public void testDeleteBookDataById()  throws PragmaticBookSelfException{
-		int book_Id=5;
-		PragmaticBookselfTask<BookEntity> delete = new DeleteBookDataByIdTask(book_Id);
+	public void testUpdateBookData() throws PragmaticBookSelfException{
+		BookEntity book= new BookEntity();
+		book.setId(1);
+		book.setB_name("organic chemestry");
+		book.setAuthor_id(109);
+		PragmaticBookselfTask task = new UpdateBookDataTask(book);
 		PragmaticBookselfSession session = new PragmaticBookselfSession();
 		StorageContext context = new StorageContext();
-
-		PragmaticBookSelfResult<BookEntity> result = delete.executeTask(session, context);
-		
-		System.out.print("Delete Successful");
-		
+		BookEntity resultedObject = (BookEntity) task.executeTask(session, context).getResultedObject();
+		System.out.print("test");
 	}
 
 }
