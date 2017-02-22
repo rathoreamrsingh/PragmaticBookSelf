@@ -21,6 +21,7 @@
 		<!-- Annotated entity classes -->
 		<mapping resource="com/pragmatic/bookself/employee/employee.hbm.xml" />
 		<mapping resource="com/pragmatic/bookself/book/book.hbm.xml" />
+		<mapping resource="com/pragmatic/bookself/student/student.hbm.xml" />
 
 	</session-factory>
 
