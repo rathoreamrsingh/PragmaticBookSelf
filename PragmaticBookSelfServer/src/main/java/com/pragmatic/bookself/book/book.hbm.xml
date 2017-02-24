@@ -16,7 +16,6 @@
 		<property name="author_id" column="author_id" type="int" />
 		<property name="rating" column="rating" type="int" />
 		<property name="pub_date" column="pub_date" type="date" />
-		<property name="book_due_date" column="book_due_date" type="date" />
-		
+
 	</class>
 </hibernate-mapping>
