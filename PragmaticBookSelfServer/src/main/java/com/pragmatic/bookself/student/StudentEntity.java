@@ -13,73 +13,88 @@ import java.sql.Date;
  * @version 1.0
  */
 public class StudentEntity {
-private int id;
-private String s_name;
-private String stream;
-private String semester;
-private int id_issue_book;
-private Date book_issue_date;
-private Date book_due_date;
-public StudentEntity(int id, String s_name, String stream, String semester, int id_issue_book, Date book_issue_date,
-		Date book_due_date) {
-	super();
-	this.id = id;
-	this.s_name = s_name;
-	this.stream = stream;
-	this.semester= semester;
-	this.id_issue_book = id_issue_book;
-	this.book_issue_date = book_issue_date;
-	this.book_due_date = book_due_date;
-}
-public StudentEntity() {
-	super();
-	// TODO Auto-generated constructor stub
-}
-public int getId() {
-	return id;
-}
-public void setId(int id) {
-	this.id = id;
-}
-public String getS_name() {
-	return s_name;
-}
-public void setS_name(String s_name) {
-	this.s_name = s_name;
-}
-public String getStream() {
-	return stream;
-}
-public void setStream(String stream) {
-	this.stream = stream;
-}
+	/**
+	 * Please read naming convention from java. Do not use _ in names use camel
+	 * case. You can keep _ in db object name, but do not repeat as it is here.
+	 */
+	private int id;
+	private String sName;
+	private String stream;
+	private String semester;
+	private int idBookIssue;
+	private Date bookIssueDate;
+	private Date bookDueDate;
 
-public String getSemester() {
-	return semester;
-}
-public void setSemester(String semester) {
-	this.semester = semester;
-}
-public int getId_issue_book() {
-	return id_issue_book;
-}
-public void setId_issue_book(int id_issue_book) {
-	this.id_issue_book = id_issue_book;
-}
-public Date getBook_issue_date() {
-	return book_issue_date;
-}
-public void setBook_issue_date(Date book_issue_date) {
-	this.book_issue_date = book_issue_date;
-}
-public Date getBook_due_date() {
-	return book_due_date;
-}
-public void setBook_due_date(Date book_due_date) {
-	this.book_due_date = book_due_date;
-}
+	public StudentEntity(int id, String sName, String stream, String semester, int idBookIssue, Date bookIssueDate,
+			Date bookDueDate) {
+		super();
+		this.id = id;
+		this.sName = sName;
+		this.stream = stream;
+		this.semester = semester;
+		this.idBookIssue = idBookIssue;
+		this.bookIssueDate = bookIssueDate;
+		this.bookDueDate = bookDueDate;
+	}
 
+	public StudentEntity() {
+		super();
+	}
 
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getsName() {
+		return sName;
+	}
+
+	public void setsName(String sName) {
+		this.sName = sName;
+	}
+
+	public String getStream() {
+		return stream;
+	}
+
+	public void setStream(String stream) {
+		this.stream = stream;
+	}
+
+	public String getSemester() {
+		return semester;
+	}
+
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
+
+	public int getIdBookIssue() {
+		return idBookIssue;
+	}
+
+	public void setIdBookIssue(int idBookIssue) {
+		this.idBookIssue = idBookIssue;
+	}
+
+	public Date getBookIssueDate() {
+		return bookIssueDate;
+	}
+
+	public void setBookIssueDate(Date bookIssueDate) {
+		this.bookIssueDate = bookIssueDate;
+	}
+
+	public Date getBookDueDate() {
+		return bookDueDate;
+	}
+
+	public void setBookDueDate(Date bookDueDate) {
+		this.bookDueDate = bookDueDate;
+	}
 
 }
