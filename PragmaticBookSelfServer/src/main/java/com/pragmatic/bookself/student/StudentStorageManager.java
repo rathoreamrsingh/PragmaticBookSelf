@@ -73,7 +73,7 @@ public class StudentStorageManager {
 	 * @return
 	 * @throws PragmaticBookSelfException
 	 */
-	public StudentEntity updateEmployeeData(StudentEntity student, StorageContext context)
+	public StudentEntity updateStudentData(StudentEntity student, StorageContext context)
 			throws PragmaticBookSelfException {
 
 		Session hibernateSession = context.getHibernateSession();
