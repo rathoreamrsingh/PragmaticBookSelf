@@ -28,7 +28,7 @@ public class UpdateEmployeeDataTaskTest extends TestCase {
 		//employee ka krna h pr kisme pass hoga
 		EmployeeEntity employee = new EmployeeEntity();
 		
-		employee.setId(1);
+		employee.setId(7);
 		employee.setAddress("Bangalore karnataka "); //pehle ye sirf bangalore tha ab update kar rahe.
 		employee.setFname("ssss");
 		employee.setLname("Kumari");

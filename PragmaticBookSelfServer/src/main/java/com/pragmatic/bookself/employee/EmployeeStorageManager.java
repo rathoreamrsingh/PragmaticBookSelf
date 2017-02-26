@@ -83,6 +83,7 @@ public class EmployeeStorageManager {
 		}
 
 		hibernateSession.evict(employee);
+		hibernateSession.flush();
 
 		return employee;
 	}

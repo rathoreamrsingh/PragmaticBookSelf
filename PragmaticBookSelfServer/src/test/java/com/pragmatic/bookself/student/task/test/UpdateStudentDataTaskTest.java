@@ -29,7 +29,6 @@ public class UpdateStudentDataTaskTest extends TestCase {
 
 		StudentEntity student = new StudentEntity();
 		student.setId(011143);
-		student.setS_name("Priya");
 		PragmaticBookselfTask task = new UpdateStudentDataTask(student);
 		PragmaticBookselfSession session = new PragmaticBookselfSession();
 		StorageContext context = new StorageContext();
