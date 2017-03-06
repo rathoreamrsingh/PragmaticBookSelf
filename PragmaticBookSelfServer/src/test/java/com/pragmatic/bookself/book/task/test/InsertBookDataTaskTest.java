@@ -42,10 +42,11 @@ public class InsertBookDataTaskTest extends TestCase {
 		result = (int) task.executeTask(session, context).getResultedObject();
 		int expectedResult = 0;
 		
+		
 		/**
 		 * is code ki wajah se insert ho k delete ho jaega.
 		 */
-		/*String selectQuery = "SELECT * from book where b_name = ? and author_id = ?";
+		String selectQuery = "SELECT * from book where b_name = ? and author_id = ?";
 		context = new StorageContext();
 		try {
 			PreparedStatement prepareStatement = context.getConnection().prepareStatement(selectQuery);
@@ -66,7 +67,7 @@ public class InsertBookDataTaskTest extends TestCase {
 		} catch (PragmaticBookSelfException | SQLException e) {
 			throw new PragmaticBookSelfException(e);
 		}
-		assertEquals(expectedResult, result);*/
+		assertEquals(expectedResult, result);
 	}
 
 }

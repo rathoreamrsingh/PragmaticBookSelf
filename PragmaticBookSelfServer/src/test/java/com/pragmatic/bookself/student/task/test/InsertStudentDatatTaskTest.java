@@ -56,6 +56,11 @@ public class InsertStudentDatatTaskTest extends TestCase {
 				expectedResult = (int) resultSet.getInt("id");
 			}
 			prepareStatement.close();
+			String deleteQuery = "DELETE FROM STUDENT WHERE ID = ?";
+			prepareStatement = context.getConnection().prepareStatement(deleteQuery);
+			prepareStatement.setInt(1, actualResult);
+			prepareStatement.executeUpdate();
+			prepareStatement.close();
 
 		} catch (PragmaticBookSelfException | SQLException e) {
 			throw new PragmaticBookSelfException(e);
