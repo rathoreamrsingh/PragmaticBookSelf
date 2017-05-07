@@ -99,7 +99,6 @@ public class BookStorageManager {
 	 * @throws PragmaticBookSelfException
 	 */
 	public BookEntity getBookDataById(int bookID, StorageContext context) throws PragmaticBookSelfException {
-		// TODO Auto-generated method stub
 		BookEntity result = null;
 		Session hibernateSession = context.getHibernateSession();
 		result = (BookEntity) hibernateSession.get(EmployeeEntity.class, bookID);

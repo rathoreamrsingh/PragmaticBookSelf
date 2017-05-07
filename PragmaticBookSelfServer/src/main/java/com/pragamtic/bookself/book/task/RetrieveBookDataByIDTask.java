@@ -18,6 +18,8 @@ import com.pragmatic.bookself.session.PragmaticBookselfSession;
 import com.pragmatic.bookself.storagecontext.StorageContext;
 
 /**
+ * Task to retrieve book data based on id.
+ * 
  * @author krishna
  *
  * @version 1.0
