@@ -46,7 +46,7 @@ public class EmployeeStorageManagerTest extends TestCase{
 		 * Details of employee.
 		 */
 		EmployeeEntity employeeEntity = new EmployeeEntity();
-		employeeEntity.setFname("Amar");
+		employeeEntity.setFname("kkk");
 		employeeEntity.setLname("Singh");
 		employeeEntity.setAddress("Room no 202, Anjali Gardens Apartment, Manikonda Hyderabad - 500089");
 		employeeEntity.setPhoneNo("+917207244657");
