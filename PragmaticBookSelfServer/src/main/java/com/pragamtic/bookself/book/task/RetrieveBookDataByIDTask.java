@@ -22,26 +22,37 @@ import com.pragmatic.bookself.storagecontext.StorageContext;
  *
  * @version 1.0
  */
-public class RetrieveBookDataByIDTask extends PragmaticBookselfTask<BookEntity>{
+public class RetrieveBookDataByIDTask extends PragmaticBookselfTask<BookEntity> {
 
 	private int bookID;
-public RetrieveBookDataByIDTask(int bookID) {
-	
-	// TODO Auto-generated constructor stub
-	this.bookID= bookID;
-}
-	/* (non-Javadoc)
-	 * @see com.pragamtic.bookself.task.core.PragmaticBookselfTask#validateParameter(com.pragmatic.bookself.session.PragmaticBookselfSession, com.pragmatic.bookself.storagecontext.StorageContext)
+
+	public RetrieveBookDataByIDTask(int bookID) {
+
+		// TODO Auto-generated constructor stub
+		this.bookID = bookID;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.pragamtic.bookself.task.core.PragmaticBookselfTask#validateParameter(
+	 * com.pragmatic.bookself.session.PragmaticBookselfSession,
+	 * com.pragmatic.bookself.storagecontext.StorageContext)
 	 */
 	@Override
 	protected void validateParameter(PragmaticBookselfSession session, StorageContext context)
 			throws PragmaticBookSelfException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	/* (non-Javadoc)
-	 * @see com.pragamtic.bookself.task.core.PragmaticBookselfTask#execute(com.pragmatic.bookself.session.PragmaticBookselfSession, com.pragmatic.bookself.storagecontext.StorageContext)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.pragamtic.bookself.task.core.PragmaticBookselfTask#execute(com.
+	 * pragmatic.bookself.session.PragmaticBookselfSession,
+	 * com.pragmatic.bookself.storagecontext.StorageContext)
 	 */
 	@Override
 	protected PragmaticBookSelfResult<BookEntity> execute(PragmaticBookselfSession session, StorageContext context)
@@ -53,8 +64,7 @@ public RetrieveBookDataByIDTask(int bookID) {
 		result.setRestltedObject(bookEntity);
 		result.setResultCode(new ResultCode(ResultCodes.SUCCESSFUL));
 		return result;
-		
+
 	}
-	
 
 }

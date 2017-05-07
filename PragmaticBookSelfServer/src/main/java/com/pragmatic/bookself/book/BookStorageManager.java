@@ -73,7 +73,8 @@ public class BookStorageManager {
 		return result;
 
 	}
-	public BookEntity updateBookData(BookEntity book, StorageContext context) throws PragmaticBookSelfException{
+
+	public BookEntity updateBookData(BookEntity book, StorageContext context) throws PragmaticBookSelfException {
 		Session hibernateSession = context.getHibernateSession();
 
 		try {
@@ -85,20 +86,24 @@ public class BookStorageManager {
 		hibernateSession.evict(book);
 
 		return book;
-		
+
 	}
 
 	/**
+	 * Retrieves book data based on ID
+	 * 
 	 * @param bookID
+	 *            - book's id
 	 * @param context
-	 * @throws PragmaticBookSelfException 
+	 *            - hibernate storage context
+	 * @throws PragmaticBookSelfException
 	 */
 	public BookEntity getBookDataById(int bookID, StorageContext context) throws PragmaticBookSelfException {
 		// TODO Auto-generated method stub
 		BookEntity result = null;
 		Session hibernateSession = context.getHibernateSession();
 		result = (BookEntity) hibernateSession.get(EmployeeEntity.class, bookID);
-
+		hibernateSession.evict(result);
 		return result;
 	}
 }
